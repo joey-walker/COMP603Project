@@ -1,0 +1,19 @@
+COMP603PROJECT
+
+Authors: Joseph Walker, ..?
+
+Project ideas:
+
+Created in Rust?
+
+Text adventure game being able to take a lot of different commands in.
+
+Example:
+http://adamcadre.ac/if/varicella.html[varicella]
+
+
+
+
+
+
+
