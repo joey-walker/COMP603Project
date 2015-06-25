@@ -1,10 +1,12 @@
 COMP603PROJECT
 
-Authors: Joseph Walker, ..?
+Authors: Joseph Walker, Mentu, Deep, Ori, Sarthak
 
 Project ideas:
 
-Created in Rust?
+Created in Rust:
+
+http://www.rust-lang.org/[Rust]
 
 Text adventure game being able to take a lot of different commands in.
 
