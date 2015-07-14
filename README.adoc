@@ -2,11 +2,7 @@ COMP603PROJECT
 
 Authors: Joseph Walker, Mentu, Deep, Ori, Sarthak
 
-Project ideas:
-
-Created in Rust:
-
-http://www.rust-lang.org/[Rust]
+== What are you working on? 
 
 Text adventure game being able to take a lot of different commands in.
 
@@ -15,7 +11,28 @@ http://adamcadre.ac/if/varicella.html[varicella]
 
 
 
+== What's your implementation language.
 
+Created in Rust:
 
+http://www.rust-lang.org/[Rust]
 
+== What have you done so far?  Did you meet your expectations for this week yet?
 
+Week of 7/13/2015:
+
+Complete: 
+
+Nothing
+
+Expectations:
+
+Starting Area with a basic level tokenizer/parser.
+
+== What do you hope to accomplish by next week? How? (Who’s doing what, if this is a team?)
+
+TBA
+
+== What do you need to move forward
+
+Nothing as of this moment.
