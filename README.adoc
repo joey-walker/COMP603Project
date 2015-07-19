@@ -29,9 +29,23 @@ Expectations:
 
 Starting Area with a basic level tokenizer/parser.
 
+Week of 7/20/2015:
+
+Complete: 
+
+Nothing
+
+Expectations:
+
+Starting Area with a basic level tokenizer/parser must be completed.
+
+Proper delegation of work, and the separate sections of the map being created from a base object.
+
+A full story for the game.
+
 == What do you hope to accomplish by next week? How? (Who’s doing what, if this is a team?)
 
-TBA
+Proper project plan for whole team
 
 == What do you need to move forward
 
