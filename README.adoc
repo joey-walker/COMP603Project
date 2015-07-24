@@ -13,9 +13,13 @@ http://adamcadre.ac/if/varicella.html[varicella]
 
 == What's your implementation language.
 
-Created in Rust:
+Created in Python 3.0:
 
-http://www.rust-lang.org/[Rust]
+https://www.python.org/[python 3.0]
+
+using Ply for tokenizing and parsing:
+
+http://www.dabeaz.com/ply/[Ply]
 
 == What have you done so far?  Did you meet your expectations for this week yet?
 
@@ -33,7 +37,7 @@ Week of 7/20/2015:
 
 Complete: 
 
-Nothing
+Basic Tokenizer
 
 Expectations:
 
