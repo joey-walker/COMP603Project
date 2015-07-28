@@ -19,22 +19,29 @@ text of objects in room, functions determining state of room/interactivity,
 Should contain the state of the room determinig player progress in the area, eg.
 until player completes puzzle, connector remains locked.
 """
+
 class Room(object):
 	pass
 
 #Our different token categories
 tokens = (
-    'MOVE', 'TALK', 'LOOK', 'JOIN', 'WHITESPACE', 'QUIT', 'INV'
+    'MOVE', 'TALK', 'LOOK', 'JOIN', 'WHITESPACE', 'QUIT', 'INV', 'DEFINITEART', 'NOUN'
     )
 		
 # Our tokens
-t_MOVE			= r'move|run|walk'
-t_TALK			= r'talk|speak|chat|tell'
-t_LOOK			= r'look|glance'
-t_JOIN			= r'to|at|and' # I walked to him
-t_WHITESPACE	= r'\s'
-t_INV			= r'inventory' #do we want this?
-t_NOUN			= r'noun '"""nouns should be everything in a room"""
+t_MOVE			= r'(?i)move|run|walk'
+t_TALK			= r'(?i)talk|speak|chat|tell'
+t_LOOK			= r'(?i)look|glance'
+t_JOIN			= r'(?i)to|at|and' # I walked to him
+t_INV			= r'(?i)inventory' #do we want this?
+t_DEFINITEART	= r'(?i)the'
+t_NOUN			= r'(?i)[a-z]+' # must be last in the list, but before function definitions
+
+def t_WHITESPACE(t):
+	r'\s+'
+#	t.lexer.skip(1)
+
+"""nouns should be everything in a room"""
 
 
 """Make room object that contains all parts of the room?
@@ -47,7 +54,7 @@ what if we want multiple different parts to a room?
 #and what of Nouns? 
 
 def t_QUIT(t):
-	r'quit'
+	r'(?i)quit'
 	s = input("Are you sure you want to quit?: ")
 	if (s == "yes" or s == "y" or s == "Yes"):
 		sys.exit()
@@ -58,17 +65,27 @@ def t_error(t):
 	t.lexer.skip(1)
 
 #parsing
-	""" Parsing?
+
+def p_statement(p):
+	'''statement : action def_noun
+			     | action NOUN'''
+	print("statement: %s" % p)
 
 def p_statement_action(p):
-	'''action : MOVE JOIN NOUN
-			  | TALK JOIN NOUN
-			  | LOOK JOIN NOUN
+	'''action  : MOVE JOIN
+			   | TALK JOIN
+			   | LOOK JOIN''' #look to
+	print("action: %s" % p)
 	
-"""
+
+def p_statement_def_noun(p):
+	'def_noun : DEFINITEART NOUN' #the dog
+	print("def noun: %s" % p)
+
 
 def p_error(p):
-	raise TypeError("Wasn't able to parse: %r" % (p.value,))
+	print("error with %s" % p)
+#	raise TypeError("Wasn't able to parse: %r" % (p.value,))
 
 
 #Main	
@@ -76,14 +93,16 @@ import ply.lex as lex
 lexer = lex.lex()
 
 import ply.yacc as yacc
-#yacc.yacc()
-
-s = input("Action > ")
-lexer.input(s)
+parser = yacc.yacc(start='def_noun')
 
 while True:
-    tok = lexer.token()
-    if not tok: 
-        break      # No more input
-    print(tok)
+	s = input("Action > ")
+	lexer.input(s)
+	parser.parse(s)
+
+	while True:
+		tok = lexer.token()	
+		if not tok: 
+			break      # No more input
+		print(tok)
 	
