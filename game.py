@@ -30,7 +30,7 @@ tokens = (
 		
 # Our tokens
 t_MOVE			= r'(?i)move|run|walk'
-t_TALK			= r'(?i)talk|speak|chat|tell|lookit'
+t_TALK			= r'(?i)talk|speak|chat|tell|look'
 t_LOOK			= r'(?i)look|glance'
 t_JOIN			= r'(?i)to|at|and'
 t_INV			= r'(?i)inventory' 
