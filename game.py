@@ -85,7 +85,7 @@ def p_statement_def_noun(p):
 def p_quit(p):
 	'quit : QUIT'
 	s = input("Are you sure you want to quit?: ")
-	if (s == "yes" or s == "y" or s == "Yes"):
+	if (s.lower() == "yes"):
 		sys.exit()
 
 def p_error(p):
