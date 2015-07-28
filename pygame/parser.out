@@ -4,34 +4,161 @@ Unused terminals:
 
     INV
     WHITESPACE
-    QUIT
 
 Grammar
 
-Rule 0     S' -> def_noun
+Rule 0     S' -> statement
 Rule 1     statement -> action def_noun
 Rule 2     statement -> action NOUN
-Rule 3     action -> MOVE JOIN
-Rule 4     action -> TALK JOIN
-Rule 5     action -> LOOK JOIN
-Rule 6     def_noun -> DEFINITEART NOUN
+Rule 3     statement -> quit
+Rule 4     action -> MOVE JOIN
+Rule 5     action -> TALK JOIN
+Rule 6     action -> LOOK JOIN
+Rule 7     def_noun -> DEFINITEART NOUN
+Rule 8     quit -> QUIT
 
 Terminals, with rules where they appear
 
-DEFINITEART          : 6
+DEFINITEART          : 7
 INV                  : 
-JOIN                 : 3 4 5
-LOOK                 : 5
-MOVE                 : 3
-QUIT                 : 
-TALK                 : 4
+JOIN                 : 4 5 6
+LOOK                 : 6
+MOVE                 : 4
+NOUN                 : 2 7
+QUIT                 : 8
+TALK                 : 5
 WHITESPACE           : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-NOUN                 : 2 6
 action               : 1 2
-def_noun             : 1 0
-statement            : 
+def_noun             : 1
+quit                 : 3
+statement            : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . action def_noun
+    (2) statement -> . action NOUN
+    (3) statement -> . quit
+    (4) action -> . MOVE JOIN
+    (5) action -> . TALK JOIN
+    (6) action -> . LOOK JOIN
+    (8) quit -> . QUIT
+
+    MOVE            shift and go to state 1
+    TALK            shift and go to state 5
+    LOOK            shift and go to state 6
+    QUIT            shift and go to state 7
+
+    quit                           shift and go to state 2
+    statement                      shift and go to state 4
+    action                         shift and go to state 3
+
+state 1
+
+    (4) action -> MOVE . JOIN
+
+    JOIN            shift and go to state 8
+
+
+state 2
+
+    (3) statement -> quit .
+
+    $end            reduce using rule 3 (statement -> quit .)
+
+
+state 3
+
+    (1) statement -> action . def_noun
+    (2) statement -> action . NOUN
+    (7) def_noun -> . DEFINITEART NOUN
+
+    NOUN            shift and go to state 11
+    DEFINITEART     shift and go to state 10
+
+    def_noun                       shift and go to state 9
+
+state 4
+
+    (0) S' -> statement .
+
+
+
+state 5
+
+    (5) action -> TALK . JOIN
+
+    JOIN            shift and go to state 12
+
+
+state 6
+
+    (6) action -> LOOK . JOIN
+
+    JOIN            shift and go to state 13
+
+
+state 7
+
+    (8) quit -> QUIT .
+
+    $end            reduce using rule 8 (quit -> QUIT .)
+
+
+state 8
+
+    (4) action -> MOVE JOIN .
+
+    NOUN            reduce using rule 4 (action -> MOVE JOIN .)
+    DEFINITEART     reduce using rule 4 (action -> MOVE JOIN .)
+
+
+state 9
+
+    (1) statement -> action def_noun .
+
+    $end            reduce using rule 1 (statement -> action def_noun .)
+
+
+state 10
+
+    (7) def_noun -> DEFINITEART . NOUN
+
+    NOUN            shift and go to state 14
+
+
+state 11
+
+    (2) statement -> action NOUN .
+
+    $end            reduce using rule 2 (statement -> action NOUN .)
+
+
+state 12
+
+    (5) action -> TALK JOIN .
+
+    NOUN            reduce using rule 5 (action -> TALK JOIN .)
+    DEFINITEART     reduce using rule 5 (action -> TALK JOIN .)
+
+
+state 13
+
+    (6) action -> LOOK JOIN .
+
+    NOUN            reduce using rule 6 (action -> LOOK JOIN .)
+    DEFINITEART     reduce using rule 6 (action -> LOOK JOIN .)
+
+
+state 14
+
+    (7) def_noun -> DEFINITEART NOUN .
+
+    $end            reduce using rule 7 (def_noun -> DEFINITEART NOUN .)
 

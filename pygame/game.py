@@ -54,13 +54,9 @@ what if we want multiple different parts to a room?
 
 """
 
-#and what of Nouns? 
-
 def t_QUIT(t):
 	r'(?i)quit'
-	s = input("Are you sure you want to quit?: ")
-	if (s == "yes" or s == "y" or s == "Yes"):
-		sys.exit()
+	return t
 
 #Lexing errors
 def t_error(t):
@@ -71,7 +67,8 @@ def t_error(t):
 
 def p_statement(p):
 	'''statement : action def_noun
-			     | action NOUN'''
+			     | action NOUN
+				 | quit'''
 	print("statement: %s" % p)
 
 def p_statement_action(p):
@@ -83,12 +80,18 @@ def p_statement_action(p):
 
 def p_statement_def_noun(p):
 	'def_noun : DEFINITEART NOUN' #the dog
-	print("def noun: %s" % p)
+	print("def_noun: %s" % p)
 
+def p_quit(p):
+	'quit : QUIT'
+	s = input("Are you sure you want to quit?: ")
+	if (s == "yes" or s == "y" or s == "Yes"):
+		sys.exit()
 
 def p_error(p):
-	print("error with %s" % p)
-#	raise TypeError("Wasn't able to parse: %r" % (p.value,))
+	print("I didn't understand the instruction")
+#	print("error with %s" % p)
+#	raise TypeError("Wasn't able to parse: %r" % (p.value,)) <- doesn't work
 
 
 #Main	
@@ -96,13 +99,16 @@ import ply.lex as lex
 lexer = lex.lex()
 
 import ply.yacc as yacc
-parser = yacc.yacc(start='def_noun')
-
+parser = yacc.yacc()
+"""
+import logging
+log = logging.getLogger() """
 while True:
 	s = input("Action > ")
 	print(s)
 	lexer.input(s)
-	#parser.parse(s)
+	
+	parser.parse(s)
 
 	while True:
 		tok = lexer.token()	

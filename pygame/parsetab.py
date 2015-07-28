@@ -5,9 +5,9 @@ _tabversion = '3.5'
 
 _lr_method = 'LALR'
 
-_lr_signature = '11A2C58796EAEF2037193A9B91F1D14C'
+_lr_signature = '70262318007A5AA7BC48F1C80E02046A'
     
-_lr_action_items = {'NOUN':([2,],[3,]),'DEFINITEART':([0,],[2,]),'$end':([1,3,],[0,-6,]),}
+_lr_action_items = {'MOVE':([0,],[1,]),'NOUN':([3,8,10,12,13,],[11,-4,14,-5,-6,]),'DEFINITEART':([3,8,12,13,],[10,-4,-5,-6,]),'$end':([2,4,7,9,11,14,],[-3,0,-8,-1,-2,-7,]),'JOIN':([1,5,6,],[8,12,13,]),'TALK':([0,],[5,]),'QUIT':([0,],[7,]),'LOOK':([0,],[6,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'def_noun':([0,],[1,]),}
+_lr_goto_items = {'def_noun':([3,],[9,]),'quit':([0,],[2,]),'statement':([0,],[4,]),'action':([0,],[3,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -25,11 +25,13 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> def_noun","S'",1,None,None,None),
-  ('statement -> action def_noun','statement',2,'p_statement','game.py',70),
-  ('statement -> action NOUN','statement',2,'p_statement','game.py',71),
+  ("S' -> statement","S'",1,None,None,None),
+  ('statement -> action def_noun','statement',2,'p_statement','game.py',69),
+  ('statement -> action NOUN','statement',2,'p_statement','game.py',70),
+  ('statement -> quit','statement',1,'p_statement','game.py',71),
   ('action -> MOVE JOIN','action',2,'p_statement_action','game.py',75),
   ('action -> TALK JOIN','action',2,'p_statement_action','game.py',76),
   ('action -> LOOK JOIN','action',2,'p_statement_action','game.py',77),
   ('def_noun -> DEFINITEART NOUN','def_noun',2,'p_statement_def_noun','game.py',82),
+  ('quit -> QUIT','quit',1,'p_quit','game.py',86),
 ]
