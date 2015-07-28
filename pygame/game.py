@@ -25,22 +25,25 @@ class Room(object):
 
 #Our different token categories
 tokens = (
-    'MOVE', 'TALK', 'LOOK', 'JOIN', 'WHITESPACE', 'QUIT', 'INV', 'DEFINITEART', 'NOUN'
+    'MOVE', 'TALK', 'LOOK', 'JOIN', 'QUIT', 'INV', 'DEFINITEART', 'WHITESPACE', 'NOUN'
     )
 		
 # Our tokens
 t_MOVE			= r'(?i)move|run|walk'
-t_TALK			= r'(?i)talk|speak|chat|tell'
+t_TALK			= r'(?i)talk|speak|chat|tell|lookit'
 t_LOOK			= r'(?i)look|glance'
-t_JOIN			= r'(?i)to|at|and' # I walked to him
-t_INV			= r'(?i)inventory' #do we want this?
-t_DEFINITEART	= r'(?i)the'
+t_JOIN			= r'(?i)to|at|and'
+t_INV			= r'(?i)inventory' 
 t_NOUN			= r'(?i)[a-z]+' # must be last in the list, but before function definitions
 
 def t_WHITESPACE(t):
 	r'\s+'
 #	t.lexer.skip(1)
 
+def t_DEFINITEART(t):
+	r'(?i)the'
+	return t
+	
 """nouns should be everything in a room"""
 
 
@@ -97,8 +100,9 @@ parser = yacc.yacc(start='def_noun')
 
 while True:
 	s = input("Action > ")
+	print(s)
 	lexer.input(s)
-	parser.parse(s)
+	#parser.parse(s)
 
 	while True:
 		tok = lexer.token()	

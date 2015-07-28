@@ -5,9 +5,9 @@ _tabversion = '3.5'
 
 _lr_method = 'LALR'
 
-_lr_signature = '0F94BBC8F49A00458030F5C75DC88532'
+_lr_signature = '11A2C58796EAEF2037193A9B91F1D14C'
     
-_lr_action_items = {'DEFINITEART':([0,],[1,]),'NOUN':([1,],[3,]),'$end':([2,3,],[0,-6,]),}
+_lr_action_items = {'NOUN':([2,],[3,]),'DEFINITEART':([0,],[2,]),'$end':([1,3,],[0,-6,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'def_noun':([0,],[2,]),}
+_lr_goto_items = {'def_noun':([0,],[1,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
