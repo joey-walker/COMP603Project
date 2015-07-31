@@ -12,6 +12,7 @@ import sys
 from enum import Enum
 class Areas(Enum):
 		area1 = 1
+		area2 = 2
 
 		
 # Example class
@@ -21,6 +22,8 @@ class Player(object):
 		self.current_location = current_location
 	def set_name(self,name):
 		self.name = name
+	def change_location(self,new_location):
+		self.current_location = new_location
 
 """
 Room -> The areas of the map, should contain connectors to other rooms, 
@@ -28,11 +31,22 @@ text of objects in room, functions determining state of room/interactivity,
 Should contain the state of the room determining player progress in the area, eg.
 until player completes puzzle, connector remains locked.
 """
-#########Rooms###############
+#########Our Rooms##########
+
+def room1():
+	print("something")
+	
+def room2():
+	print("something else")
+
+############################
 
 
-
-
+#Dictionary declaration to be used as a switch case
+room_functions = {Areas.area1 : room1,
+Areas.area2 : room2
+}
+	
 #Our different token categories
 tokens = (
     'MOVE', 'TALK', 'LOOK', 'JOIN', 'QUIT', 'INV', 'DEFINITEART', 'WHITESPACE', 'NOUN'
@@ -108,8 +122,6 @@ def p_error(p):
 def init_player():
 	return Player(Areas.area1)
 
-
-
 #Main	
 import ply.lex as lex
 lexer = lex.lex()
@@ -122,6 +134,18 @@ log = logging.getLogger() """
 
 ## Start Game instructions
 player = init_player()
+
+
+### How to do switch case
+
+room_functions[player.current_location]()
+
+player.change_location(Areas.area2)
+
+room_functions[player.current_location]()
+
+###
+
 print("hsdhkjgdsk")
 
 while True:
