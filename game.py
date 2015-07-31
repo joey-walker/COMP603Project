@@ -8,20 +8,30 @@
 
 import sys
 
+#which area are we in?
+from enum import Enum
+class Areas(Enum):
+		area1 = 1
+
+		
 # Example class
-# Human -> Player, should hold onto a inventory(if we want), location of player
-class Human(object):
-	pass
+# Player, should hold onto a inventory(if we want), location of player
+class Player(object):
+	def __init__(self,current_location):
+		self.current_location = current_location
+	def set_name(self,name):
+		self.name = name
 
 """
 Room -> The areas of the map, should contain connectors to other rooms, 
 text of objects in room, functions determining state of room/interactivity,
-Should contain the state of the room determinig player progress in the area, eg.
+Should contain the state of the room determining player progress in the area, eg.
 until player completes puzzle, connector remains locked.
 """
+#########Rooms###############
 
-class Room(object):
-	pass
+
+
 
 #Our different token categories
 tokens = (
@@ -94,6 +104,12 @@ def p_error(p):
 #	raise TypeError("Wasn't able to parse: %r" % (p.value,)) <- doesn't work
 
 
+#Initialize player for starting the game
+def init_player():
+	return Player(Areas.area1)
+
+
+
 #Main	
 import ply.lex as lex
 lexer = lex.lex()
@@ -103,6 +119,11 @@ parser = yacc.yacc()
 """
 import logging
 log = logging.getLogger() """
+
+## Start Game instructions
+player = init_player()
+print("hsdhkjgdsk")
+
 while True:
 	s = input("Action > ")
 	print(s)
