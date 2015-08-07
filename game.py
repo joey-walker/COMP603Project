@@ -14,7 +14,6 @@ class Areas(Enum):
 		area1 = 1
 		area2 = 2
 
-		
 # Example class
 # Player, should hold onto a inventory(if we want), location of player
 class Player(object):
@@ -22,8 +21,6 @@ class Player(object):
 		self.current_location = current_location
 	def set_name(self,name):
 		self.name = name
-	def change_location(self,new_location):
-		self.current_location = new_location
 
 """
 Room -> The areas of the map, should contain connectors to other rooms, 
@@ -93,24 +90,32 @@ def p_statement(p):
 	'''statement : action def_noun
 			     | action NOUN
 				 | quit'''
-	print("statement: %s" % p)
+				 
+	if(p[1].lower() == "quit"):
+		s = input("Are you sure you want to quit?: ")
+		if (s.lower() == "yes"):
+			sys.exit()
+		else:
+			return
+
+	print(p[1])
+	print(p[2])
+	p[0] = p[1] + " " + p[2]
+	print(p[0])	
 
 def p_statement_action(p):
 	'''action  : MOVE JOIN
 			   | TALK JOIN
-			   | LOOK JOIN''' #look to
-	print("action: %s" % p)
-	
+			   | LOOK JOIN''' 
+	p[0] = p[1]
 
 def p_statement_def_noun(p):
 	'def_noun : DEFINITEART NOUN' #the dog
-	print("def_noun: %s" % p)
+	p[0] = p[2]
 
 def p_quit(p):
 	'quit : QUIT'
-	s = input("Are you sure you want to quit?: ")
-	if (s.lower() == "yes"):
-		sys.exit()
+	p[0] = p[1]
 
 def p_error(p):
 	print("I didn't understand the instruction")
@@ -133,25 +138,21 @@ import logging
 log = logging.getLogger() """
 
 ## Start Game instructions
+
 player = init_player()
-
-
 ### How to do switch case
 
 room_functions[player.current_location]()
 
-player.change_location(Areas.area2)
+player.current_location = Areas.area2
 
 room_functions[player.current_location]()
 
 ###
 
-print("hsdhkjgdsk")
-
 while True:
 	s = input("Action > ")
-	print(s)
-	lexer.input(s)
+	#lexer.input(s)
 	
 	parser.parse(s)
 
