@@ -69,13 +69,16 @@ def room1(p):
 	#print(p[0])	
 	if(p[1].lower()=="look"):
 		if(p[2].lower() == "room"):
-			print("You examine your room, it is a nice room; it contains a door which operates as an obvious exit.\nA computer's with its screen alight is waiting for user input.")
+			print("You examine your room, it is a nice room.\nIt contains a door which operates as an obvious exit.\nA computer's with its screen alight is waiting for user input.")
 		elif(p[2].lower() == "alarm"):
-			print("wow")
+			print("Still intact from your punch, and no longer making noise.\nAin't the future great?")
 		elif(p[2].lower() == "door"):
 			print("You examine the door.\nIts a monolithic sort of thing, as are all doors on Dreadnought Kamzhor.")
 		elif(p[2].lower() == "computer"):
-			print("wowcomp")
+			if player.name is None:
+				print("You examine your computer, on the screen are the instructions:\n\"NAME EXPIRED, PLEASE SAY NEW NAME\"")
+			else:
+				print("Your name displays on the screen: \"%s\"" % player.name)
 		elif(p[2].lower() == "joey"):
 			print("Stop breaking the fourth wall.")
 		else: 
@@ -83,13 +86,18 @@ def room1(p):
 			
 	if(p[1].lower()=="move"):
 		if(p[2].lower() == "room"):
-			print("You are already in the room")
+			print("You are already in the room.")
 		elif(p[2].lower() == "alarm"):
 			print("There is no point in moving to your alarm, now follow the damn script.")
 		elif(p[2].lower() == "door"):
-			print("wowdoor")
+			if player.name is None:
+				print("You try to exit the room, but the door refuses to open. \nPerhaps try talking to it?")
+			else:
+				print("You exit the room into the hallway")
+				player.current_location = Areas.area2
+				room2(p)
 		elif(p[2].lower() == "computer"):
-			print("wowcomp")
+			print("You are already near the computer.\nSo you just halve the distance between you and the computer.")
 		elif(p[2].lower() == "joey"):
 			player.points -= 10
 			print("You cannot move the narrator, as hard as you try.  You lose ten points.\nPoint count: %s" % player.points)
@@ -107,7 +115,11 @@ def room1(p):
 			else:
 				print("The door screeches once again as you try to speak:\n \"NAME CONFIRMED, YOU MAY PROCEED LIEUTENANT %s\"" % player.name)
 		elif(p[2].lower() == "computer"):
-			print("wowcomp")
+			if player.name is None:
+				newname = input("You say your name to the computer: \n")
+				player.name = newname
+			else:
+				print("Nothing happens, as you have already completed the instructions")
 		elif(p[2].lower() == "joey"):
 			print("Stop talking to me.")
 		else: 
