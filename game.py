@@ -111,7 +111,7 @@ def room1(p):
 			print("You speak to the alarm, chatting of lofty philosophical ideas,\nit stares back at you in awkward silence.")
 		elif(p[2].lower() == "door"):
 			if player.name is None:
-				print("You try speaking to the door, but the moment you open mouth it screeches at you:\n\"ERROR, OLD NAME LOST FOR WHATEVER REASON.\nINPUT NEW NAME AT YOUR COMPUTER TERMINAL\"\n")
+				print("You try speaking to the door\nHowever the moment you open your mouth it screeches at you:\n\"ERROR, OLD NAME LOST FOR WHATEVER REASON.\nINPUT NEW NAME AT YOUR COMPUTER TERMINAL\"\n")
 			else:
 				print("The door screeches once again as you try to speak:\n \"NAME CONFIRMED, YOU MAY PROCEED LIEUTENANT %s\"" % player.name)
 		elif(p[2].lower() == "computer"):
